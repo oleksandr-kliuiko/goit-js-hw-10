@@ -1,8 +1,13 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
 
 const btn = document.querySelector('button');
+btn.disabled = true;
+
 const picker = document.querySelector('#datetime-picker');
 
 let userSelectedDate = new Date();
@@ -13,12 +18,17 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      console.log(new Date());
+    //   console.log(selectedDates[0]);
+    //   console.log(new Date());
 
       if (selectedDates[0] <= new Date()) {
           btn.disabled = true;
-          window.alert("Please choose a date in the future");
+        
+          iziToast.show({
+              title: 'Error',
+              message: 'Please choose a date in the future'
+          });
+
       } else {
           btn.disabled = false;
           userSelectedDate = selectedDates[0];
@@ -57,7 +67,7 @@ function updateTimer() {
 
     if (difference <= 0) {
         clearInterval(intervalID);
-        btn.disabled = false;
+        // btn.disabled = false;
         picker.disabled = false;
         return;
     }
