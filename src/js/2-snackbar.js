@@ -37,5 +37,5 @@ form.addEventListener("submit", event => {
                 backgroundColor: 'red'
             });
         })
-        .finally(() => form.reset);
+        .finally(() => form.reset());
 });
