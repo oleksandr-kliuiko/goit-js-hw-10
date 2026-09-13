@@ -10,9 +10,11 @@ const makePromise = () => {
 
         setTimeout(() => {
             if (state.value === "fulfilled") {
-                resolve(delay.value);
+                resolve(Number(delay.value));
+            } else if (state === "rejected") {
+                reject(Number(delay.value));
             } else {
-                reject(delay.value);
+                throw new Error(`Unexpected state value: ${state}`);
             }
         }, Number(delay.value));
     });
